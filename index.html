@@ -331,7 +331,30 @@ I 8      color: white;
       <a class="btn" href="sms:2677612883">💬 TEXT THEMBULLS</a>
     </div>
   </section>
+<script>
+const animatedItems = document.querySelectorAll(
+  'header, .hero, section, .card, .btn, footer'
+);
 
+animatedItems.forEach((item) => {
+  item.style.opacity = '0';
+  item.style.transform = 'translateY(30px)';
+  item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+animatedItems.forEach((item) => observer.observe(item));
+</script>
 
   <footer>
     <p>© 2026 Thembulls Towing LLC</p>
