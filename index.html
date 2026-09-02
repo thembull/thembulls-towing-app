@@ -10,12 +10,73 @@
 .services p {
   color: #f5f5f5;
 }
-  <style>
+  <style> /* WEBSITE MOVEMENT */
+
+header h1 {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.hero h2 {
+  animation: slideDown 1s ease-out;
+}
+
+.hero p {
+  animation: slideUp 1.4s ease-out;
+}
+
+.hero .btn,
+button,
+a.button {
+  animation: pulse 2s infinite;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #f4b400;
+  }
+  to {
+    text-shadow: 0 0 20px #f4b400, 0 0 30px #f4b400;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
+    
 
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -60,7 +121,8 @@ I 8      color: white;
     }
 
     .hero p {
-      font-size: 21px;
+  font-size: 21px;
+}
       max-width: 700px;
       margin: auto;
     }
