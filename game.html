@@ -1423,6 +1423,8 @@ body{background:#02060b!important}
   </div>
  </div>
 <div id="routeCard" style="position:fixed;right:12px;top:86px;z-index:22;background:#07111ee8;border:1px solid #2a9fff;border-radius:12px;padding:9px 11px;color:#fff;font:700 11px Arial;pointer-events:none;box-shadow:0 8px 28px #0009"><span style="color:#65cfff">GPS ROUTE</span><br>South Philly → Wreck<br><span style="color:#ffc229">I-95 / I-76 PRIORITY</span></div>
+<div id="scannerPanel" style="position:fixed;left:12px;top:238px;z-index:22;pointer-events:none;background:#07111ee8;border-left:3px solid #ffc229;border-radius:8px;padding:7px 9px;color:#fff;font:800 10px Arial;box-shadow:0 5px 20px #0008"><span style="color:#ffc229">POLICE SCANNER</span><br><span id="scannerText">Broad St & Washington Ave • crash reported</span><br><span style="color:#8ce8ff">PRIORITY 2 • 2.4 MI</span></div>
+<div id="damagePanel" style="position:fixed;right:12px;top:164px;z-index:22;pointer-events:none;background:#07111ee8;border:1px solid #526d82;border-radius:8px;padding:7px 9px;color:#fff;font:800 10px Arial"><span style="color:#ffcf43">TRUCK STATUS</span><br>❤ ❤ ❤ &nbsp; DAMAGE <span id="damagePct">0%</span><br><span style="color:#7ef09b">GARAGE READY</span></div>
 <div id="callTypes" style="position:fixed;left:12px;bottom:118px;z-index:21;pointer-events:none;background:#07111ee8;border:1px solid #526d82;border-radius:9px;padding:7px 9px;color:#fff;font:800 9px Arial"><span style="color:#ffc229">CALL TYPES</span> · CRASH · ROLLOVER · HIGHWAY · DISABLED · MULTI-VEHICLE</div>
 <div id="weatherBadge" style="position:fixed;right:12px;bottom:88px;z-index:21;pointer-events:none;background:#07111ee8;border:1px solid #526d82;border-radius:7px;padding:5px 8px;color:#bfe9ff;font:800 9px Arial">NIGHT • WET ROADS</div>
 <div id="worldTags" style="position:fixed;right:12px;bottom:118px;z-index:21;display:flex;gap:5px;pointer-events:none;font:800 9px Arial;color:#fff"><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">PASSYUNK AVE</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">COLUMBUS BLVD</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">I-95</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">I-76</span></div>
@@ -1430,10 +1432,12 @@ body{background:#02060b!important}
 const c=document.getElementById('g'),x=c.getContext('2d');let W,H,D=1;
 function resize(){D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}addEventListener('resize',resize);resize();
 const keys={};const truck={lane:0,z:80,speed:0,loaded:false,loading:false,unloading:false,loadProgress:0};const rival={lane:1.4,z:260};const wreck={lane:-1.2,z:680,active:true,type:'VEHICLE CRASH',payout:1250};const yard={lane:1.5,z:1550};
-let cash=0,rep=0,playing=false,cam=0,last=0,streak=0,careerRank='ROOKIE';/* visual milestone: career progression + dispatch/navigation HUD inspired by target concept */
+let cash=0,rep=0,playing=false,cam=0,last=0,streak=0,careerRank='ROOKIE',truckDamage=0,lives=3,scannerTick=0;/* visual milestone: career progression + dispatch/navigation HUD inspired by target concept */
+const scannerCalls=['Broad St & Washington Ave • crash reported','Passyunk Ave & Oregon Ave • disabled vehicle','Columbus Blvd • multi-vehicle crash','I-95 South • rollover blocking lane','I-76 East • priority recovery'];
+function updateScanner(t){if(t-scannerTick<9000)return;scannerTick=t;let el=document.getElementById('scannerText');if(el)el.textContent=scannerCalls[Math.floor(t/9000)%scannerCalls.length];}
 function updateCareerUI(){let bar=document.getElementById('careerBar');if(bar)bar.style.width=Math.min(100,12+rep*8)+'%';careerRank=rep>=9?'WRECK CHASER':rep>=6?'ROAD BOSS':rep>=3?'TOW PRO':'ROOKIE';}
 function project(lane,z){let rel=z-truck.z,horizon=cam===0?H*.28:H*.42,depth=Math.max(25,rel+(cam===0?180:240)),s=(cam===0?520:640)/depth,xPos=Math.max(48,Math.min(W-48,W/2+(lane-truck.lane*.45)*115*s)),yPos=horizon+H*.68*Math.min(1,180/depth);return{x:xPos,y:yPos,s:Math.max(.18,Math.min(2.2,s))}}
-function road(){
+function road(){updateScanner(performance.now());
 // South Philly landmark/route visual pass
 // wet-road reflections and distant emergency-scene lighting
 x.save();let wet=x.createLinearGradient(0,H*.52,0,H);wet.addColorStop(0,'rgba(80,125,160,.02)');wet.addColorStop(1,'rgba(120,170,210,.14)');x.fillStyle=wet;x.fillRect(0,H*.52,W,H*.48);let pulse=(Math.sin(performance.now()/180)+1)/2;x.globalAlpha=.10+.10*pulse;x.fillStyle='#287dff';x.fillRect(W*.15,H*.38,3,H*.34);x.fillStyle='#ff334d';x.fillRect(W*.82,H*.40,3,H*.31);x.restore();
