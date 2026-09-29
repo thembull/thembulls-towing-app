@@ -1474,10 +1474,22 @@ if(flatbed){
   if(o._player){x.fillStyle='#16191c';x.fillRect(-20*S,62*S,40*S,5*S);x.fillStyle='#d9dde0';x.fillRect(-15*S,64*S,30*S,2*S);x.fillStyle='#f6b900';x.fillRect(-22*S,-20*S,4*S,18*S);x.fillRect(18*S,-20*S,4*S,18*S)}
 }
 if(label){x.fillStyle='#fff';x.font=`bold ${Math.max(9,12*S)}px Arial`;x.textAlign='center';x.fillText(label,0,-75*S)}x.restore()}
-let audioCtx=null,engineOsc=null,engineGain=null,soundOn=true;
-function audioStart(){if(!soundOn)return;if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();if(!engineOsc){engineOsc=audioCtx.createOscillator();engineGain=audioCtx.createGain();engineOsc.type='sine';engineOsc.frequency.value=42;engineGain.gain.value=.018;engineOsc.connect(engineGain);engineGain.connect(audioCtx.destination);engineOsc.start()}}
-function tone(f=220,d=.12){if(!soundOn)return;audioStart();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.value=.018;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+d);o.stop(audioCtx.currentTime+d)}
-function updateEngineSound(){if(engineOsc&&audioCtx){engineOsc.frequency.setTargetAtTime(38+Math.abs(truck.speed||0)*.42,audioCtx.currentTime,.06);engineGain.gain.setTargetAtTime(soundOn?.014:0,audioCtx.currentTime,.08)}}
+let audioCtx=null,engineOsc=null,engineOsc2=null,engineGain=null,engineFilter=null,soundOn=true,lastEngineSpeed=0,airBrakeReady=true;
+function audioStart(){
+ if(!soundOn)return;
+ if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==='suspended')audioCtx.resume();
+ if(!engineOsc){
+  engineOsc=audioCtx.createOscillator();engineOsc2=audioCtx.createOscillator();engineGain=audioCtx.createGain();engineFilter=audioCtx.createBiquadFilter();
+  engineOsc.type='sawtooth';engineOsc2.type='square';engineOsc.frequency.value=88;engineOsc2.frequency.value=44;
+  engineFilter.type='lowpass';engineFilter.frequency.value=520;engineFilter.Q.value=1.1;engineGain.gain.value=.045;
+  engineOsc.connect(engineFilter);engineOsc2.connect(engineFilter);engineFilter.connect(engineGain);engineGain.connect(audioCtx.destination);
+  engineOsc.start();engineOsc2.start();
+ }
+}
+function tone(f=220,d=.12,volume=.055,type='sine'){if(!soundOn)return;audioStart();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=f;g.gain.value=volume;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+d);o.stop(audioCtx.currentTime+d)}
+function airBrake(){if(!soundOn||!audioCtx)return;let length=Math.floor(audioCtx.sampleRate*.22),buffer=audioCtx.createBuffer(1,length,audioCtx.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<length;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/length,2);let src=audioCtx.createBufferSource(),filter=audioCtx.createBiquadFilter(),gain=audioCtx.createGain();filter.type='bandpass';filter.frequency.value=1350;filter.Q.value=.65;gain.gain.value=.11;src.buffer=buffer;src.connect(filter);filter.connect(gain);gain.connect(audioCtx.destination);src.start()}
+function updateEngineSound(){if(engineOsc&&audioCtx){let speed=Math.abs(truck.speed||0),throttle=keys.up||keys.down?1:0,f=86+speed*1.35+throttle*18;engineOsc.frequency.setTargetAtTime(f,audioCtx.currentTime,.08);engineOsc2.frequency.setTargetAtTime(f*.5,audioCtx.currentTime,.1);engineFilter.frequency.setTargetAtTime(460+speed*7+throttle*180,audioCtx.currentTime,.12);engineGain.gain.setTargetAtTime(soundOn?(soundMode===2?.025:.052):0,audioCtx.currentTime,.08);if(lastEngineSpeed-speed>7&&speed<10&&airBrakeReady){airBrake();airBrakeReady=false;setTimeout(()=>airBrakeReady=true,900)}lastEngineSpeed=speed}}
 let rivalTowProgress=0,rivalHasTow=false,rivalDelay=5.5;
 
 let upgrades={engine:0,winch:0,tires:0,lights:0,suspension:0,turbo:0,winch2:0,bed:0};
@@ -1687,7 +1699,7 @@ document.addEventListener('visibilitychange',()=>{
   if(!document.hidden) last=performance.now();
 });
 let soundMode=1;
-document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.007:.014,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(55,.035)}
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
 document.addEventListener('pointerdown',unlockGameAudio,{once:true});
 document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
 
