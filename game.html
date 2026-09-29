@@ -1430,7 +1430,8 @@ body{background:#02060b!important}
 const c=document.getElementById('g'),x=c.getContext('2d');let W,H,D=1;
 function resize(){D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}addEventListener('resize',resize);resize();
 const keys={};const truck={lane:0,z:80,speed:0,loaded:false,loading:false,unloading:false,loadProgress:0};const rival={lane:1.4,z:260};const wreck={lane:-1.2,z:680,active:true,type:'VEHICLE CRASH',payout:1250};const yard={lane:1.5,z:1550};
-let cash=0,rep=0,playing=false,cam=0,last=0;/* visual milestone: career progression + dispatch/navigation HUD inspired by target concept */
+let cash=0,rep=0,playing=false,cam=0,last=0,streak=0,careerRank='ROOKIE';/* visual milestone: career progression + dispatch/navigation HUD inspired by target concept */
+function updateCareerUI(){let bar=document.getElementById('careerBar');if(bar)bar.style.width=Math.min(100,12+rep*8)+'%';careerRank=rep>=9?'WRECK CHASER':rep>=6?'ROAD BOSS':rep>=3?'TOW PRO':'ROOKIE';}
 function project(lane,z){let rel=z-truck.z,horizon=cam===0?H*.28:H*.42,depth=Math.max(25,rel+(cam===0?180:240)),s=(cam===0?520:640)/depth,xPos=Math.max(48,Math.min(W-48,W/2+(lane-truck.lane*.45)*115*s)),yPos=horizon+H*.68*Math.min(1,180/depth);return{x:xPos,y:yPos,s:Math.max(.18,Math.min(2.2,s))}}
 function road(){
 // South Philly landmark/route visual pass
