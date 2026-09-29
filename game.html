@@ -1418,8 +1418,12 @@ body{background:#02060b!important}
   <div style="height:4px;background:#26313d;margin:7px 0;border-radius:4px;overflow:hidden"><div id="careerBar" style="height:100%;width:12%;background:#ffc229"></div></div>
   <div style="display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:11px;color:#dce7ef"><span>DISPATCH • Vehicle crash</span><b style="color:#61dcff">2.4 mi</b><span>CHASE → RECOVER → DELIVER</span><b style="color:#67ef91">$1,250</b></div>
  </div>
-</div>
+  <div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:9px;text-align:center;font-weight:900">
+   <span style="border:1px solid #ffc229;border-radius:6px;padding:4px;color:#ffc229">1 POSITION</span><span style="border:1px solid #75899b;border-radius:6px;padding:4px">2 LOWER BED</span><span style="border:1px solid #75899b;border-radius:6px;padding:4px">3 WINCH</span><span style="border:1px solid #75899b;border-radius:6px;padding:4px">4 SECURE</span>
+  </div>
+ </div>
 <div id="routeCard" style="position:fixed;right:12px;top:86px;z-index:22;background:#07111ee8;border:1px solid #2a9fff;border-radius:12px;padding:9px 11px;color:#fff;font:700 11px Arial;pointer-events:none;box-shadow:0 8px 28px #0009"><span style="color:#65cfff">GPS ROUTE</span><br>South Philly → Wreck<br><span style="color:#ffc229">I-95 / I-76 PRIORITY</span></div>
+<div id="worldTags" style="position:fixed;right:12px;bottom:118px;z-index:21;display:flex;gap:5px;pointer-events:none;font:800 9px Arial;color:#fff"><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">PASSYUNK AVE</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">COLUMBUS BLVD</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">I-95</span><span style="background:#0b1a27dd;border:1px solid #526d82;border-radius:6px;padding:5px">I-76</span></div>
 <script>
 const c=document.getElementById('g'),x=c.getContext('2d');let W,H,D=1;
 function resize(){D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0)}addEventListener('resize',resize);resize();
@@ -1427,6 +1431,8 @@ const keys={};const truck={lane:0,z:80,speed:0,loaded:false,loading:false,unload
 let cash=0,rep=0,playing=false,cam=0,last=0;/* visual milestone: career progression + dispatch/navigation HUD inspired by target concept */
 function project(lane,z){let rel=z-truck.z,horizon=cam===0?H*.28:H*.42,depth=Math.max(25,rel+(cam===0?180:240)),s=(cam===0?520:640)/depth,xPos=Math.max(48,Math.min(W-48,W/2+(lane-truck.lane*.45)*115*s)),yPos=horizon+H*.68*Math.min(1,180/depth);return{x:xPos,y:yPos,s:Math.max(.18,Math.min(2.2,s))}}
 function road(){
+// South Philly landmark/route visual pass
+x.save();x.globalAlpha=.92;x.fillStyle='#0c1823';x.fillRect(W*.035,H*.23,118,27);x.strokeStyle='#6a8aa2';x.strokeRect(W*.035,H*.23,118,27);x.fillStyle='#eaf6ff';x.font='800 13px Arial';x.textAlign='center';x.fillText((Math.floor(truck.z/700)%3===0?'PASSYUNK AVE':Math.floor(truck.z/700)%3===1?'COLUMBUS BLVD':'SOUTH BROAD'),W*.035+59,H*.23+18);x.restore();
 // v23 cinematic urban chase atmosphere
 let chaseSky=x.createLinearGradient(0,0,0,H*.48);
 chaseSky.addColorStop(0,'rgba(5,13,25,.42)');chaseSky.addColorStop(1,'rgba(17,35,52,.05)');
