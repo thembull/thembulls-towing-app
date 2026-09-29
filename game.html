@@ -1441,9 +1441,12 @@ function updateCareerUI(){let bar=document.getElementById('careerBar');if(bar)ba
 function project(lane,z){let rel=z-truck.z,horizon=cam===0?H*.28:H*.42,depth=Math.max(25,rel+(cam===0?180:240)),s=(cam===0?520:640)/depth,xPos=Math.max(48,Math.min(W-48,W/2+(lane-truck.lane*.45)*115*s)),yPos=horizon+H*.68*Math.min(1,180/depth);return{x:xPos,y:yPos,s:Math.max(.18,Math.min(2.2,s))}}
 function road(){updateScanner(performance.now());updateMissionUI();
 // South Philly landmark/route visual pass
+// elevated rail / industrial corridor silhouette inspired by South Philly target
+x.save();x.fillStyle='#111820';x.fillRect(0,H*.305,W,H*.035);for(let i=0;i<W;i+=78)x.fillRect(i,H*.305,9,H*.20);x.strokeStyle='#394957';x.lineWidth=3;x.beginPath();x.moveTo(0,H*.303);x.lineTo(W,H*.303);x.stroke();x.fillStyle='#263746';for(let i=20;i<W;i+=150)x.fillRect(i,H*.272,96,H*.026);x.restore();
 // rowhome/storefront corridor silhouettes for denser South Philly street identity
 x.save();for(let side of[-1,1]){for(let i=0;i<6;i++){let bx=side<0?i*46:W-i*46-42,base=H*.42+(i%2)*7;x.fillStyle=i%2?'#242b32':'#302a2a';x.fillRect(bx,base-64,42,64);x.fillStyle='#d8ad55';x.globalAlpha=.55;for(let wy=0;wy<2;wy++)for(let wx=0;wx<2;wx++)x.fillRect(bx+8+wx*17,base-48+wy*18,7,9);x.globalAlpha=1;x.fillStyle='#111820';x.fillRect(bx+4,base-15,34,15)}}x.restore();
 // wet-road reflections and distant emergency-scene lighting
+x.save();let skylineY=H*.265;x.fillStyle='#162331';for(let i=0;i<8;i++){let sw=24+(i%3)*9,sh=28+(i%4)*13;x.fillRect(W*.63+i*30,skylineY-sh,sw,sh)}x.fillStyle='#d9c46b';x.fillRect(W*.74,skylineY-84,8,84);x.beginPath();x.moveTo(W*.744,skylineY-106);x.lineTo(W*.735,skylineY-84);x.lineTo(W*.753,skylineY-84);x.fill();x.restore();
 x.save();let wet=x.createLinearGradient(0,H*.52,0,H);wet.addColorStop(0,'rgba(80,125,160,.02)');wet.addColorStop(1,'rgba(120,170,210,.14)');x.fillStyle=wet;x.fillRect(0,H*.52,W,H*.48);let pulse=(Math.sin(performance.now()/180)+1)/2;x.globalAlpha=.10+.10*pulse;x.fillStyle='#287dff';x.fillRect(W*.15,H*.38,3,H*.34);x.fillStyle='#ff334d';x.fillRect(W*.82,H*.40,3,H*.31);x.restore();
 x.save();x.globalAlpha=.92;x.fillStyle='#0c1823';x.fillRect(W*.035,H*.23,118,27);x.strokeStyle='#6a8aa2';x.strokeRect(W*.035,H*.23,118,27);x.fillStyle='#eaf6ff';x.font='800 13px Arial';x.textAlign='center';x.fillText((Math.floor(truck.z/700)%3===0?'PASSYUNK AVE':Math.floor(truck.z/700)%3===1?'COLUMBUS BLVD':'SOUTH BROAD'),W*.035+59,H*.23+18);x.restore();
 // v23 cinematic urban chase atmosphere
