@@ -1548,7 +1548,7 @@ let upgrades={engine:0,winch:0,tires:0,lights:0,suspension:0,turbo:0,winch2:0,be
 let towStreak=0,totalTows=0;
 let callType='STANDARD';let callBonus=0;
 setTimeout(()=>rollCallType(),0);
-let careerRank='ROOKIE';let bestStreak=0;
+bestStreak=0;
 let district='SOUTH PHILLY';let districtBonus=0;
 const upgradeCost={engine:900,winch:700,tires:600,lights:350,suspension:1200,turbo:1800,winch2:2500,bed:3500};
 function refreshShop(){let e=document.getElementById('shopCash');if(e)e.textContent='AVAILABLE CASH: $'+cash+' • Installed: '+Object.entries(upgrades).filter(([k,v])=>v).map(([k])=>k.toUpperCase()).join(', ');let g=document.getElementById('nextGoal');if(g){let left=Object.keys(upgradeCost).filter(k=>!upgrades[k]).sort((a,b)=>upgradeCost[a]-upgradeCost[b]);g.textContent=left.length?'NEXT AFFORDABLE GOAL: '+left[0].toUpperCase()+' • $'+upgradeCost[left[0]]:'ALL GARAGE UPGRADES INSTALLED';if(e)e.textContent+=' • TOWS: '+totalTows+' • STREAK: '+towStreak}}
