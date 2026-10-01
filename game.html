@@ -1598,46 +1598,85 @@ function rollCallType(){
  const flash=document.getElementById('missionFlash');
  if(flash)flash.innerHTML=call.label+'<br><span style="font-size:13px">BASE PAY $'+wreck.payout+' - '+call.priority+'</span>';
 }
-function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
-if(truck.loaded&&!rivalHasTow){
- let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
- rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
- rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
- if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
-   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+function update(dt){
+ if(!playing)return;
+ updateEngineSound(); updateTruckCondition();
+ let sh=document.getElementById('streak'); if(sh)sh.textContent=towStreak;
+ updateCareer(); updateDistrict();
+ if(truck.loaded&&!rivalHasTow){
+  let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+  rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+  rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+  if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45)document.getElementById('status').textContent='RIVAL ON YOUR TAIL - GET TO THE YARD!';
  }
-}
-if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;rollCallType();document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
-if(truck.loading||truck.unloading){
-  truck.speed=0;
-  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
-  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
-  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+ if(wreck.active&&!rivalHasTow){
+  if(rivalDelay>0){rivalDelay-=dt}else{
+   let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;
+   rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;
+   if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;
+   else if(Math.abs(dl)<.42){
+    rivalTowProgress+=dt;
+    if(rivalTowProgress>=4.2){
+     rivalHasTow=true; wreck.active=false; rivalTowProgress=0; towStreak=0;
+     document.getElementById('status').textContent='RIVAL WON THIS WRECK - STREAK RESET'; tone(95,.35);
+     setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;rollCallType();},1400);
+    }
+   }
+  }
+ }else if(!wreck.active)rivalTowProgress=0;
+ if(truck.loading||truck.unloading){
+  truck.speed=0; truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'),rf=document.getElementById('recoveryFill'),rt=document.getElementById('recoveryText');
+  rm.style.display='block';rf.style.width=Math.round(truck.loadProgress*100)+'%';
   document.getElementById('speedReadout').textContent='0 MPH';
   document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
   rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
   let p=truck.loadProgress;
-  document.getElementById('status').textContent=truck.loading
-    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
-    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  document.getElementById('status').textContent=truck.loading?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL'):(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
   if(p>=1){
-    if(truck.loading){
-      truck.loading=false;truck.loaded=true;wreck.active=false;
-      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
-      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
-    }else{
-      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
-const mf=document.getElementById('missionFlash');
-if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
-      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
-      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;rollCallType();
-      document.getElementById('status').textContent='+
-    }
-    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+   if(truck.loading){
+    truck.loading=false;truck.loaded=true;wreck.active=false;
+    document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+    document.getElementById('status').textContent='VEHICLE SECURED - READY TO TRANSPORT';
+   }else{
+    truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;
+    let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;
+    cash+=towPay;let oldRep=rep;rep+=10;
+    if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE - $250 BONUS';}
+    tone(420,.055);setTimeout(()=>tone(560,.075),85);
+    const mf=document.getElementById('missionFlash');if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+    document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+    wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;rollCallType();
+    document.getElementById('status').textContent='+$'+towPay+' - +10 REP - '+callType;
+   }
+   truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
   }
   return;
-}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
-
+ }
+ if(keys.up)truck.speed+=36*dt;
+ if(keys.down)truck.speed-=45*dt;
+ truck.speed*=Math.pow(.985,dt*60);
+ truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));
+ if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;
+ if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;
+ truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;
+ impactCooldown=Math.max(0,impactCooldown-dt);
+ if(impactCooldown<=0&&!truck.loading&&!truck.unloading){
+  let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);
+  if(rz<30&&rl<.62){
+   truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);
+   rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;
+   tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?'IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% - '+lives+' LIVES LEFT':'TRUCK DISABLED - GARAGE REPAIR REQUIRED';
+  }
+ }
+ if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;
+ let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z),laneGap=Math.abs(truck.lane-target.lane);
+ if(dist<115&&truck.speed>28)truck.speed*=.93;
+ let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55,yardReady=truck.loaded&&dist<125&&laneGap<1.65;
+ document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';
+ document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));
+ document.getElementById('status').textContent=yardReady?'YARD POSITION - UNLOAD READY':(ready?'RECOVERY POSITION - LOAD READY':(truck.loaded?'Vehicle secured - Yard '+Math.round(dist)+' ft':'Wreck '+Math.round(dist)+' ft - '+Math.round(Math.max(0,truck.speed))+' MPH'));
+}
 /* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
 /* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
 function road(){
