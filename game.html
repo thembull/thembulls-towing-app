@@ -1334,6 +1334,21 @@ body:not(.shift-started) .controls{opacity:.18;pointer-events:none}
  }
 }
 
+
+/* v247 CAREER-DISPATCH MILESTONE */
+#careerBar{transition:width .35s ease}
+#careerNext{color:#9fe8ff;font-size:10px;font-weight:800}
+#routeCard .routePay{color:#67ef91;font-size:13px;font-weight:900}
+@media(max-width:900px){
+ #milestoneHUD{top:84px!important;left:8px!important;width:min(300px,calc(100vw - 16px))!important;opacity:.94!important}
+ #milestoneHUD>div:first-child{padding:8px 9px!important}
+ #milestoneHUD .careerSteps{font-size:8px!important;gap:3px!important}
+ #routeCard{top:84px!important;right:8px!important;font-size:9px!important;padding:7px 8px!important;max-width:34vw!important}
+ #scannerPanel{top:214px!important;left:8px!important;max-width:54vw!important;font-size:8px!important}
+ #damagePanel{top:158px!important;right:8px!important;font-size:8px!important}
+ #callTypes{display:none!important}
+ #weatherBadge{right:8px!important;bottom:84px!important}
+}
 </style>
 
 <style>
@@ -1414,8 +1429,8 @@ body{background:#02060b!important}
 <div id="milestoneHUD" style="position:fixed;left:12px;top:86px;z-index:22;width:min(330px,calc(100vw - 24px));pointer-events:none;font-family:Arial,sans-serif">
  <div style="background:#07111ee8;border:1px solid #e7ad19;border-radius:12px;padding:10px 12px;box-shadow:0 8px 28px #0009">
   <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:#ffc229;letter-spacing:.8px">WRECK CHASING • SOUTH PHILLY</b><span style="color:#7fe7ff;font-size:11px">CAREER</span></div>
-  <div style="margin-top:7px;display:flex;gap:5px;font-size:10px;font-weight:800;color:#fff"><span style="color:#ffc229">ROOKIE</span><span>›</span><span>TOW PRO</span><span>›</span><span>ROAD BOSS</span><span>›</span><span>WRECK CHASER</span></div>
-  <div style="height:4px;background:#26313d;margin:7px 0;border-radius:4px;overflow:hidden"><div id="careerBar" style="height:100%;width:12%;background:#ffc229"></div></div>
+  <div class="careerSteps" style="margin-top:7px;display:flex;gap:5px;font-size:10px;font-weight:800;color:#fff"><span style="color:#ffc229">ROOKIE</span><span>›</span><span>TOW PRO</span><span>›</span><span>ROAD BOSS</span><span>›</span><span>WRECK CHASER</span></div>
+  <div style="height:4px;background:#26313d;margin:7px 0;border-radius:4px;overflow:hidden"><div id="careerBar" style="height:100%;width:0%;background:#ffc229"></div></div><div id="careerNext">NEXT RANK • TOW PRO • 50 REP</div>
   <div style="display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:11px;color:#dce7ef"><span>DISPATCH • Vehicle crash</span><b style="color:#61dcff">2.4 mi</b><span>CHASE → RECOVER → DELIVER</span><b style="color:#67ef91">$1,250</b></div>
  </div>
   <div style="margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:9px;text-align:center;font-weight:900">
@@ -1424,7 +1439,7 @@ body{background:#02060b!important}
  </div>
 <div id="miniMap" style="position:fixed;right:12px;top:226px;z-index:22;width:128px;height:96px;background:#07111ef0;border:1px solid #2a9fff;border-radius:10px;overflow:hidden;pointer-events:none;font:800 8px Arial;color:#fff">
 <svg viewBox="0 0 128 96" width="128" height="96" aria-label="South Philly mini map"><rect width="128" height="96" fill="#0b1722"/><path d="M8 78 L42 58 L58 65 L83 43 L120 24" stroke="#2c526d" stroke-width="8" fill="none"/><path d="M8 78 L42 58 L58 65 L83 43 L120 24" stroke="#ffc229" stroke-width="2" fill="none"/><path d="M20 10V90M48 4V92M78 6V88M105 5V82" stroke="#31414e" stroke-width="2"/><circle cx="42" cy="58" r="4" fill="#63d8ff"/><circle cx="105" cy="31" r="4" fill="#ff4055"/><text x="5" y="10" fill="#fff">CITY MAP</text><text x="82" y="92" fill="#7ee6ff">I-95</text></svg></div>
-<div id="routeCard" style="position:fixed;right:12px;top:86px;z-index:22;background:#07111ee8;border:1px solid #2a9fff;border-radius:12px;padding:9px 11px;color:#fff;font:700 11px Arial;pointer-events:none;box-shadow:0 8px 28px #0009"><span style="color:#65cfff">GPS ROUTE</span><br>South Philly → Wreck<br><span style="color:#ffc229">I-95 / I-76 PRIORITY</span></div>
+<div id="routeCard" style="position:fixed;right:12px;top:86px;z-index:22;background:#07111ee8;border:1px solid #2a9fff;border-radius:12px;padding:9px 11px;color:#fff;font:700 11px Arial;pointer-events:none;box-shadow:0 8px 28px #0009"><span style="color:#65cfff">GPS ROUTE</span><br><span id="routeText">South Philly → Wreck</span><br><span id="routeRoad" style="color:#ffc229">WASHINGTON / PASSYUNK</span><br><span class="routePay" id="routePay">CALL PAY • $450+</span></div>
 <div id="missionFlow" style="position:fixed;left:50%;transform:translateX(-50%);top:78px;z-index:23;pointer-events:none;background:#07111ef0;border:1px solid #ffc229;border-radius:10px;padding:7px 12px;color:#fff;font:900 10px Arial;box-shadow:0 6px 22px #0009;text-align:center"><span style="color:#ffc229">ACTIVE RECOVERY</span> <span id="missionPhase">CHASE</span><br><span id="missionObjective" style="color:#bfe9ff">Reach the wreck scene</span></div>
 <div id="scannerPanel" style="position:fixed;left:12px;top:238px;z-index:22;pointer-events:none;background:#07111ee8;border-left:3px solid #ffc229;border-radius:8px;padding:7px 9px;color:#fff;font:800 10px Arial;box-shadow:0 5px 20px #0008"><span style="color:#ffc229">POLICE SCANNER</span><br><span id="scannerText">Broad St & Washington Ave • crash reported</span><br><span style="color:#8ce8ff">PRIORITY 2 • 2.4 MI</span></div>
 <div id="damagePanel" style="position:fixed;right:12px;top:164px;z-index:22;pointer-events:none;background:#07111ee8;border:1px solid #526d82;border-radius:8px;padding:7px 9px;color:#fff;font:800 10px Arial"><span style="color:#ffcf43">TRUCK STATUS</span><br>❤ ❤ ❤ &nbsp; DAMAGE <span id="damagePct">0%</span><br><span style="color:#7ef09b">GARAGE READY</span></div>
@@ -1551,17 +1566,1315 @@ function updateDistrict(){
 }
 function updateCareer(){
  bestStreak=Math.max(bestStreak,towStreak);
- careerRank=rep>=150?'WRECK CHASER':rep>=100?'ROAD BOSS':rep>=50?'TOW PRO':'ROOKIE';
- let c=document.getElementById('career');
- if(c)c.textContent=careerRank+' • BEST STREAK '+bestStreak;
+ const tiers=[['ROOKIE',0,50,'TOW PRO'],['TOW PRO',50,100,'ROAD BOSS'],['ROAD BOSS',100,150,'WRECK CHASER'],['WRECK CHASER',150,Infinity,'MAX RANK']];
+ const tier=tiers.find(t=>rep>=t[1]&&rep<t[2])||tiers[3];
+ careerRank=tier[0];
+ const c=document.getElementById('career'); if(c)c.textContent=careerRank+' • BEST STREAK '+bestStreak;
+ const bar=document.getElementById('careerBar');
+ const next=document.getElementById('careerNext');
+ const pct=tier[2]===Infinity?100:Math.max(0,Math.min(100,((rep-tier[1])/(tier[2]-tier[1]))*100));
+ if(bar)bar.style.width=pct+'%';
+ if(next)next.textContent=tier[2]===Infinity?'MAX RANK • WRECK CHASER':('NEXT RANK • '+tier[3]+' • '+tier[2]+' REP • '+Math.max(0,tier[2]-rep)+' TO GO');
 }
 function rollCallType(){
- let r=Math.random(),rankBoost=rep>=100?.08:rep>=50?.04:0;
- if(r<.16+rankBoost){callType='HIGHWAY';callBonus=200}
- else if(r<.38+rankBoost){callType='PRIORITY';callBonus=100}
- else{callType='STANDARD';callBonus=0}
- let m=document.getElementById('mission');
- if(m)m.textContent=(callType==='STANDARD'?'WRECK CALL':callType+' WRECK')+(callBonus?' • BONUS $'+callBonus:'');
+ const calls=[
+  {type:'STANDARD',bonus:0,label:'VEHICLE CRASH',road:'WASHINGTON / PASSYUNK',scanner:'Broad St & Washington Ave • crash reported',priority:'PRIORITY 2'},
+  {type:'DISABLED',bonus:75,label:'DISABLED VEHICLE',road:'OREGON / PASSYUNK',scanner:'Passyunk Ave • disabled vehicle blocking lane',priority:'PRIORITY 2'},
+  {type:'MULTI-VEHICLE',bonus:125,label:'MULTI-VEHICLE',road:'COLUMBUS BLVD',scanner:'Columbus Blvd • multi-vehicle crash',priority:'PRIORITY 1'},
+  {type:'HIGHWAY',bonus:200,label:'HIGHWAY ROLLOVER',road:'I-95 SOUTH',scanner:'I-95 South • rollover blocking lane',priority:'PRIORITY 1'},
+  {type:'PRIORITY',bonus:300,label:'PRIORITY RECOVERY',road:'I-76 EAST',scanner:'I-76 East • priority recovery request',priority:'PRIORITY 1'}
+ ];
+ const rankBoost=rep>=100?.10:rep>=50?.05:0;
+ let r=Math.random()+rankBoost;
+ let idx=r<.18?0:r<.38?1:r<.58?2:r<.82?3:4;
+ const call=calls[idx]; callType=call.type; callBonus=call.bonus;
+ wreck.type=call.label; wreck.payout=450+callBonus;
+ const m=document.getElementById('mission'),sc=document.getElementById('scannerText'),road=document.getElementById('routeRoad'),pay=document.getElementById('routePay'),rt=document.getElementById('routeText');
+ if(m)m.textContent=call.label+(callBonus?' • BONUS 
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;rollCallType();document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;rollCallType();
+      document.getElementById('status').textContent='+
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++callBonus:'');
+ if(sc)sc.textContent=call.scanner;
+ if(road)road.textContent=call.road;
+ if(pay)pay.textContent='CALL PAY • 
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;
+      document.getElementById('mission').textContent='SCANNER: New wreck dispatched';
+      document.getElementById('status').textContent='+$'+towPay+' • +10 REP';
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++wreck.payout+'+';
+ if(rt)rt.textContent=(call.type==='HIGHWAY'||call.type==='PRIORITY')?'South Philly → Highway Recovery':'South Philly → Wreck';
+ const flash=document.getElementById('missionFlash'); if(flash)flash.innerHTML=call.label+'<br><span style="font-size:13px">BASE PAY 
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;
+      document.getElementById('mission').textContent='SCANNER: New wreck dispatched';
+      document.getElementById('status').textContent='+$'+towPay+' • +10 REP';
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++wreck.payout+' • '+call.priority+'</span>';
+}
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;
+      document.getElementById('mission').textContent='SCANNER: New wreck dispatched';
+      document.getElementById('status').textContent='+$'+towPay+' • +10 REP';
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++towPay+' • +10 REP • '+callType;
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++callBonus:'');
+ if(sc)sc.textContent=call.scanner;
+ if(road)road.textContent=call.road;
+ if(pay)pay.textContent='CALL PAY • 
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;
+      document.getElementById('mission').textContent='SCANNER: New wreck dispatched';
+      document.getElementById('status').textContent='+$'+towPay+' • +10 REP';
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++wreck.payout+'+';
+ if(rt)rt.textContent=(call.type==='HIGHWAY'||call.type==='PRIORITY')?'South Philly → Highway Recovery':'South Philly → Wreck';
+ const flash=document.getElementById('missionFlash'); if(flash)flash.innerHTML=call.label+'<br><span style="font-size:13px">BASE PAY 
+function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
+if(truck.loaded&&!rivalHasTow){
+ let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
+ rival.lane+=Math.max(-1,Math.min(1,chaseL))*dt*.38;
+ rival.z+=Math.sign(chaseZ)*Math.min(24,Math.abs(chaseZ))*dt;
+ if(Math.abs(chaseZ)<22&&Math.abs(chaseL)<.45){
+   document.getElementById('status').textContent='RIVAL ON YOUR TAIL • GET TO THE YARD!';
+ }
+}
+if(wreck.active&&!rivalHasTow){if(rivalDelay>0){rivalDelay-=dt}else{let dz=wreck.z-rival.z,dl=wreck.lane-rival.lane;rival.lane+=Math.max(-1,Math.min(1,dl))*dt*.34;if(Math.abs(dz)>18)rival.z+=Math.sign(dz)*Math.min(21,Math.abs(dz))*dt;else if(Math.abs(dl)<.42){rivalTowProgress+=dt;if(rivalTowProgress>=4.2){rivalHasTow=true;wreck.active=false;rivalTowProgress=0;towStreak=0;document.getElementById('status').textContent='RIVAL WON THIS WRECK • STREAK RESET';tone(95,.35);setTimeout(()=>{rivalHasTow=false;rivalDelay=5.5;wreck.z=truck.z+700;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;rival.z=truck.z+420;document.getElementById('mission').textContent='SCANNER: New wreck dispatched'},1400)}}}}else if(!wreck.active)rivalTowProgress=0;
+if(truck.loading||truck.unloading){
+  truck.speed=0;
+  truck.loadProgress=Math.min(1,truck.loadProgress+dt*.38);
+  const rm=document.getElementById('recoveryMeter'), rf=document.getElementById('recoveryFill'), rt=document.getElementById('recoveryText');
+  rm.style.display='block'; rf.style.width=Math.round(truck.loadProgress*100)+'%';
+  document.getElementById('speedReadout').textContent='0 MPH';
+  document.getElementById('targetReadout').textContent=truck.loading?'LOADING':'UNLOADING';
+  rt.textContent=truck.loading?'ROLLBACK RECOVERY':'YARD UNLOAD';
+  let p=truck.loadProgress;
+  document.getElementById('status').textContent=truck.loading
+    ?(p<.25?'BED TILTING DOWN':p<.75?'WINCHING VEHICLE ONTO BED':'BED RETURNING LEVEL')
+    :(p<.25?'BED TILTING DOWN':p<.75?'UNLOADING VEHICLE':'BED RETURNING LEVEL');
+  if(p>=1){
+    if(truck.loading){
+      truck.loading=false;truck.loaded=true;wreck.active=false;
+      document.getElementById('mission').textContent='DELIVER: Thembulls Yard';
+      document.getElementById('status').textContent='VEHICLE SECURED • READY TO TRANSPORT';
+    }else{
+      truck.unloading=false;truck.loaded=false;towStreak++;totalTows++;let towPay=450+Math.min(250,(towStreak-1)*50)+callBonus+districtBonus;cash+=towPay;let oldRep=rep;rep+=10;if(Math.floor(rep/50)>Math.floor(oldRep/50)){cash+=250;towPay+=250;document.getElementById('status').textContent='REP MILESTONE • $250 BONUS'}tone(420,.055);setTimeout(()=>tone(560,.075),85);
+const mf=document.getElementById('missionFlash');
+if(mf){mf.style.display='block';setTimeout(()=>mf.style.display='none',1200);}
+      document.getElementById('cash').textContent=cash;document.getElementById('rep').textContent=rep;
+      wreck.z=truck.z+750;wreck.lane=-1.8+Math.random()*3.6;wreck.active=true;yard.z=truck.z+1600;
+      document.getElementById('mission').textContent='SCANNER: New wreck dispatched';
+      document.getElementById('status').textContent='+$'+towPay+' • +10 REP';
+    }
+    truck.loadProgress=0;document.getElementById('recoveryMeter').style.display='none';
+  }
+  return;
+}if(keys.up)truck.speed+=36*dt;if(keys.down)truck.speed-=45*dt;truck.speed*=Math.pow(.985,dt*60);truck.speed=Math.max(-35,Math.min(120-(truckDamage*.35),truck.speed));if(keys.left)truck.lane-=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;if(keys.right)truck.lane+=(upgrades.suspension?3.35:(upgrades.tires?3.1:2.4))*dt;truck.lane=Math.max(-2.7,Math.min(2.7,truck.lane));truck.z+=truck.speed*dt;rival.z+=62*dt;impactCooldown=Math.max(0,impactCooldown-dt);if(impactCooldown<=0&&!truck.loading&&!truck.unloading){let rz=Math.abs(truck.z-rival.z),rl=Math.abs(truck.lane-rival.lane);if(rz<30&&rl<.62){truckDamage=Math.min(100,truckDamage+34);lives=Math.max(0,lives-1);truck.speed=Math.min(truck.speed,18);rival.z=truck.z+55;rival.lane=Math.max(-2.7,Math.min(2.7,rival.lane+(rival.lane>=truck.lane?.55:-.55)));impactCooldown=1.15;tone(72,.18,.07,'sawtooth');document.getElementById('status').textContent=lives>0?('IMPACT! TRUCK DAMAGE '+Math.round(truckDamage)+'% • '+lives+' LIVES LEFT'):'TRUCK DISABLED • GARAGE REPAIR REQUIRED';}}if(!truck.loaded&&wreck.active&&rival.z>wreck.z-30)rival.z=wreck.z-30;let target=truck.loaded?yard:wreck,dist=Math.abs(target.z-truck.z);let laneGap=Math.abs(truck.lane-target.lane);if(dist<115&&truck.speed>28)truck.speed*=.93;let ready=!truck.loaded&&wreck.active&&dist<95&&laneGap<1.55;let yardReady=truck.loaded&&dist<125&&laneGap<1.65;document.getElementById('speedReadout').textContent=Math.round(Math.max(0,truck.speed))+' MPH';document.getElementById('targetReadout').textContent=yardReady?'PRESS LOAD / UNLOAD':(ready?'PRESS LOAD / UNLOAD':(truck.loaded?'YARD AHEAD':(wreck.active?'WRECK AHEAD':'RECOVERY')));document.getElementById('status').textContent=yardReady?'YARD POSITION • UNLOAD READY':(ready?'RECOVERY POSITION • LOAD READY':(truck.loaded?`Vehicle secured • Yard ${Math.round(dist)} ft`:`Wreck ${Math.round(dist)} ft • ${Math.round(Math.max(0,truck.speed))} MPH`))}
+
+/* v240 APP VISUAL UPGRADE — corrected truck scale, cab glass/door depth, deck hardware, restrained glow */
+/* v235 CINEMATIC STREET MILESTONE — grounded blocks, richer road surface, stronger vehicle contact */
+function road(){
+ let h=cam===0?H*.245:H*.36;
+ let sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#030912');sky.addColorStop(.62,'#10263a');sky.addColorStop(1,'#324b5b');x.fillStyle=sky;x.fillRect(0,0,W,h);
+ // distant skyline
+ x.fillStyle='#0a1119';for(let i=0;i<18;i++){let bw=20+(i%5)*10,bh=28+(i%7)*11,xx=(i*67)%W;x.fillRect(xx,h-bh,bw,bh);if(i%4===0){x.fillStyle='#c8a84a';x.fillRect(xx+6,h-bh+8,3,4);x.fillStyle='#0a1119'}}
+ // horizon haze separates skyline from the playable street plane
+ let haze=x.createLinearGradient(0,h*.72,0,h*1.12);haze.addColorStop(0,'rgba(150,185,205,0)');haze.addColorStop(1,'rgba(150,185,205,.12)');x.fillStyle=haze;x.fillRect(0,h*.72,W,h*.4);
+ // asphalt trapezoid
+ let rg=x.createLinearGradient(0,h,0,H);rg.addColorStop(0,'#3b4148');rg.addColorStop(.55,'#252a30');rg.addColorStop(1,'#111419');x.fillStyle=rg;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();
+ // curbs/sidewalks
+ x.strokeStyle='#a5a7a8';x.lineWidth=5;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // dark gutter bands create a raised-road/sidewalk separation
+ x.strokeStyle='rgba(0,0,0,.48)';x.lineWidth=12;x.beginPath();x.moveTo(W*.431,h);x.lineTo(W*.038,H);x.moveTo(W*.569,h);x.lineTo(W*.962,H);x.stroke();
+ x.strokeStyle='#a5a7a8';x.lineWidth=4;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.moveTo(W*.565,h);x.lineTo(W*.955,H);x.stroke();
+ // perspective lane shading gives the roadway actual volume instead of a flat poster
+ x.save();let laneShade=x.createLinearGradient(W*.18,0,W*.82,0);laneShade.addColorStop(0,'rgba(0,0,0,.20)');laneShade.addColorStop(.28,'rgba(255,255,255,.025)');laneShade.addColorStop(.50,'rgba(255,255,255,.055)');laneShade.addColorStop(.72,'rgba(255,255,255,.025)');laneShade.addColorStop(1,'rgba(0,0,0,.20)');x.fillStyle=laneShade;x.beginPath();x.moveTo(W*.435,h);x.lineTo(W*.045,H);x.lineTo(W*.955,H);x.lineTo(W*.565,h);x.closePath();x.fill();x.restore();
+ // v222 sidewalk slabs and grounded curb shadows
+ x.save();x.globalAlpha=.20;x.strokeStyle='#b7b9ba';for(let z=Math.floor(truck.z/150)*150;z<truck.z+1300;z+=150){for(let side of[-3.25,3.25]){let a=project(side,z),b=project(side,z+105);if(a.y>h&&a.y<H*.96){x.lineWidth=Math.max(.7,1.1*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}x.restore();
+ // v235 asphalt texture: restrained tire paths + repaired seams, clipped to roadway perspective
+ x.save();x.globalAlpha=.10;for(let z=Math.floor(truck.z/175)*175;z<truck.z+1500;z+=175){let a=project(-1.25,z),b=project(1.25,z+80);if(a.y>h&&a.y<H*.94){x.strokeStyle='#080a0c';x.lineWidth=Math.max(1,3*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(project(-1.25,z+80).x,project(-1.25,z+80).y);x.moveTo(b.x,b.y);x.lineTo(project(1.25,z).x,project(1.25,z).y);x.stroke()}}x.restore();
+ // moving center dashes
+ x.strokeStyle='#e7c43d';x.lineCap='round';for(let z=Math.floor(truck.z/120)*120;z<truck.z+1800;z+=120){let a=project(0,z),b=project(0,z+48);x.lineWidth=Math.max(1,4*a.s);x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+ // v235 building contact shadows anchor both sidewalks before facades are drawn
+ x.save();x.globalAlpha=.26;x.fillStyle='#050607';for(let z=Math.floor(truck.z/205)*205;z<truck.z+1650;z+=205){for(let side of[-1,1]){let p=project(side*3.75,z);if(p.y>h*1.02&&p.y<H*.88){let ss=Math.min(.78,p.s);x.beginPath();x.ellipse(p.x,p.y+3*ss,38*ss,8*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // rowhomes + storefront glow + streetlights
+ for(let z=Math.floor(truck.z/205)*205;z<truck.z+1850;z+=205){for(let side of[-1,1]){let p=project(side*4.15,z),S=Math.min(p.s,.78),variant=((Math.floor(z/205)+side+8)%3),hh=(104+variant*13)*S,ww=(70+variant*5)*S;if(p.y<h*1.02||p.y>H*.88)continue;x.fillStyle=((Math.floor(z/170)+side)&1)?'#654637':'#4e555c';x.fillRect(p.x-ww/2,p.y-hh,ww,hh);/* v222 facade volume: visible side plane + roof cap */let dep=10*S;x.fillStyle='rgba(22,24,27,.72)';x.beginPath();if(side<0){x.moveTo(p.x+ww/2,p.y-hh);x.lineTo(p.x+ww/2+dep,p.y-hh-dep*.35);x.lineTo(p.x+ww/2+dep,p.y-dep*.35);x.lineTo(p.x+ww/2,p.y)}else{x.moveTo(p.x-ww/2,p.y-hh);x.lineTo(p.x-ww/2-dep,p.y-hh-dep*.35);x.lineTo(p.x-ww/2-dep,p.y-dep*.35);x.lineTo(p.x-ww/2,p.y)}x.closePath();x.fill();x.fillStyle='rgba(150,130,110,.28)';x.fillRect(p.x-ww*.52,p.y-hh-6*S,ww*1.04,6*S);x.fillStyle='#2b2522';x.fillRect(p.x-ww*.53,p.y-hh-4*S,ww*1.06,5*S);x.fillStyle='#17191c';x.fillRect(p.x-ww*.34,p.y-hh*.28,ww*.68,hh*.28);x.fillStyle='#30343a';x.fillRect(p.x-ww*.22,p.y-hh*.08,ww*.44,hh*.08);/* grounded stoop + sidewalk contact */x.fillStyle='#777b7e';x.fillRect(p.x-ww*.46,p.y-4*S,ww*.92,4*S);x.fillStyle='#33373a';x.fillRect(p.x-ww*.30,p.y-9*S,ww*.60,5*S);x.fillStyle='#e9c55b';for(let r=0;r<2;r++)for(let j=0;j<2;j++)x.fillRect(p.x-ww*.28+j*ww*.34,p.y-hh*.78+r*hh*.24,ww*.17,hh*.13);x.fillStyle='#202428';x.fillRect(p.x-ww*.12,p.y-hh*.22,ww*.24,hh*.22);if(((z/170)|0)%3===0){x.fillStyle='#8a2525';x.fillRect(p.x-ww*.38,p.y-hh*.34,ww*.76,5*S);x.fillStyle='#d6d0bd';for(let aw=-.30;aw<.31;aw+=.15)x.fillRect(p.x+ww*aw,p.y-hh*.34,ww*.07,5*S);}
+   x.strokeStyle='#25282c';x.lineWidth=Math.max(1,1.5*S);x.beginPath();x.moveTo(p.x-side*ww*.62,p.y);x.lineTo(p.x-side*ww*.62,p.y-hh*.62);x.stroke();}}
+ // transverse pavement seams compress toward the horizon and strengthen forward depth
+ x.save();x.globalAlpha=.16;x.strokeStyle='#c5c7c8';for(let z=Math.floor(truck.z/210)*210;z<truck.z+1650;z+=210){let l=project(-2.55,z),r=project(2.55,z);if(l.y>h&&l.y<H*.96){x.lineWidth=Math.max(.6,1.4*l.s);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(r.x,r.y);x.stroke()}}x.restore();
+ // roadside utility poles kept behind gameplay actors
+ for(let z=Math.floor(truck.z/260)*260;z<truck.z+1500;z+=260){for(let side of[-1,1]){let p=project(side*3.72,z),S=Math.min(p.s,.62);if(p.y<h*1.05||p.y>H*.80)continue;x.strokeStyle='#1c2024';x.lineWidth=Math.max(1,3*S);x.beginPath();x.moveTo(p.x,p.y);x.lineTo(p.x,p.y-82*S);x.stroke();x.beginPath();x.moveTo(p.x-12*S,p.y-68*S);x.lineTo(p.x+12*S,p.y-68*S);x.stroke()}}
+ // v225 street furniture + corner depth: hydrants, lamp pools and stop bars ground the block
+ let nextBlock=Math.floor(truck.z/620+1)*620;
+ for(let side of[-1,1]){let hp=project(side*3.35,nextBlock-78);if(hp.y>h*1.08&&hp.y<H*.73){let hs=Math.min(.55,hp.s);x.save();x.translate(hp.x,hp.y);x.fillStyle='#b52d27';x.fillRect(-3*hs,-13*hs,6*hs,13*hs);x.beginPath();x.arc(0,-13*hs,4*hs,Math.PI,0);x.fill();x.fillRect(-6*hs,-9*hs,12*hs,3*hs);x.restore()}}
+ let stopL=project(-2.5,nextBlock-55),stopR=project(2.5,nextBlock-55);if(stopL.y>h*1.05&&stopL.y<H*.76){x.save();x.globalAlpha=.72;x.strokeStyle='#e8e5da';x.lineWidth=Math.max(2,8*stopL.s);x.beginPath();x.moveTo(stopL.x,stopL.y);x.lineTo(stopR.x,stopR.y);x.stroke();x.restore()}
+ // subtle curb shadows under parked cars/buildings keep objects attached to the street
+ x.save();x.globalAlpha=.16;x.fillStyle='#000';for(let z=Math.floor(truck.z/290)*290+95;z<truck.z+1200;z+=290){for(let side of[-1,1]){let sh=project(side*3.18,z);if(sh.y>h*1.08&&sh.y<H*.78){let ss=Math.min(.55,sh.s);x.beginPath();x.ellipse(sh.x,sh.y+2*ss,14*ss,5*ss,0,0,Math.PI*2);x.fill()}}}x.restore();
+ // speed streaks
+ let sp=Math.min(1,Math.abs(truck.speed)/90);if(sp>.45){x.save();x.globalAlpha=.07*sp;x.strokeStyle='#dce8ef';for(let i=0;i<8;i++){let yy=H*(.55+i*.055);x.beginPath();x.moveTo(W*.08,yy);x.lineTo(W*.015,yy+28*sp);x.moveTo(W*.92,yy);x.lineTo(W*.985,yy+28*sp);x.stroke()}x.restore()}
+ /* v216 South Philly identity + road-depth pass */
+ // lane-edge reflectors and pavement seams
+ x.save();x.globalAlpha=.58;for(let z=Math.floor(truck.z/95)*95;z<truck.z+1600;z+=95){for(let lane of[-2.45,2.45]){let q=project(lane,z);if(q.y>h&&q.y<H){x.fillStyle='#e8e4c8';x.fillRect(q.x-2*q.s,q.y,4*q.s,7*q.s)}}}x.restore();
+ // v226 intersection pavement volume: darker cross-street asphalt stays inside the curb returns
+ let blockCross=Math.floor(truck.z/620+1)*620;
+ let ixA=project(-2.7,blockCross-48),ixB=project(2.7,blockCross+48);if(ixA.y>h*1.05&&ixA.y<H*.74){x.save();x.globalAlpha=.34;x.fillStyle='#20252a';x.beginPath();x.moveTo(0,ixA.y-10);x.lineTo(W,ixA.y-10);x.lineTo(W,ixB.y+10);x.lineTo(0,ixB.y+10);x.closePath();x.fill();x.restore()}
+ // v223 real block break: crosswalk bars and corner curb cuts make the corridor read as city streets
+ for(let zz=blockCross-34;zz<=blockCross+34;zz+=17){let L=project(-2.55,zz),R=project(2.55,zz);if(L.y>h*1.06&&L.y<H*.72){x.save();x.globalAlpha=.42;x.strokeStyle='#d7d4ca';x.lineWidth=Math.max(1.5,4.5*L.s);x.beginPath();x.moveTo(L.x,L.y);x.lineTo(R.x,R.y);x.stroke();x.restore()}}
+ // short curb-return lines at the intersection corners
+ let cL=project(-3.0,blockCross),cR=project(3.0,blockCross);if(cL.y>h*1.06&&cL.y<H*.72){x.save();x.strokeStyle='#9b9d9f';x.lineWidth=Math.max(1.5,3*cL.s);x.beginPath();x.moveTo(cL.x-34*cL.s,cL.y);x.lineTo(cL.x,cL.y);x.moveTo(cR.x,cR.y);x.lineTo(cR.x+34*cR.s,cR.y);x.stroke();x.restore()}
+ // v224 side-street openings: dark asphalt mouths crossing the sidewalks at the active block
+ if(cL.y>h*1.06&&cL.y<H*.72){x.save();let ss=Math.max(.24,Math.min(.65,cL.s));x.fillStyle='#171a1e';x.beginPath();x.moveTo(0,cL.y-18*ss);x.lineTo(cL.x,cL.y-10*ss);x.lineTo(cL.x,cL.y+18*ss);x.lineTo(0,cL.y+34*ss);x.closePath();x.fill();x.beginPath();x.moveTo(cR.x,cR.y-10*ss);x.lineTo(W,cR.y-18*ss);x.lineTo(W,cR.y+34*ss);x.lineTo(cR.x,cR.y+18*ss);x.closePath();x.fill();x.strokeStyle='#b8b9b7';x.lineWidth=Math.max(1,2*ss);x.beginPath();x.moveTo(0,cL.y+34*ss);x.lineTo(cL.x,cL.y+18*ss);x.moveTo(cR.x,cR.y+18*ss);x.lineTo(W,cR.y+34*ss);x.stroke();x.restore()}
+ // v224 parked curb vehicles, kept outside the playable lanes
+ for(let z=Math.floor(truck.z/360)*360+120;z<truck.z+1350;z+=360){for(let side of((((z/360)|0)%2)?[-1]:[1])){let pv=project(side*3.18,z);if(pv.y<h*1.08||pv.y>H*.78)continue;let ps=Math.min(.55,pv.s),pw=19*ps,ph=42*ps;x.save();x.translate(pv.x,pv.y);x.fillStyle=((z/290|0)+side)%2?'#303943':'#6f2424';x.beginPath();x.roundRect(-pw/2,-ph,pw,ph,4*ps);x.fill();x.fillStyle='#9fb6c3';x.fillRect(-pw*.34,-ph*.72,pw*.68,ph*.25);x.fillStyle='#08090a';x.fillRect(-pw*.60,-ph*.72,3*ps,10*ps);x.fillRect(pw*.60-3*ps,-ph*.72,3*ps,10*ps);x.restore()}}
+ // v224 storefront identity panels add readable neighborhood scale without blocking gameplay
+ for(let z=Math.floor(truck.z/510)*510+210;z<truck.z+1200;z+=510){for(let side of[-1,1]){let sp=project(side*4.05,z);if(sp.y<h*1.10||sp.y>H*.70)continue;let ss=Math.min(.55,sp.s);x.fillStyle='#20252a';x.fillRect(sp.x-30*ss,sp.y-48*ss,60*ss,11*ss);x.fillStyle='#e6c44e';x.font=`700 ${Math.max(5,7*ss)}px Arial`;x.textAlign='center';x.fillText(side<0?'PASSYUNK AUTO':'SOUTH PHILLY',sp.x,sp.y-40*ss)}}
+ // overhead traffic signal at the next cross street
+ let cross=blockCross,cp=project(0,cross);if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.34,cp.s));x.strokeStyle='#17191c';x.lineWidth=Math.max(2,4*ss);x.beginPath();x.moveTo(W*.19,cp.y);x.lineTo(W*.19,cp.y-92*ss);x.lineTo(W*.81,cp.y-92*ss);x.stroke();for(let lx of[W*.39,W*.61]){x.fillStyle='#111';x.fillRect(lx-10*ss,cp.y-101*ss,20*ss,30*ss);x.fillStyle='#d53a2f';x.beginPath();x.arc(lx,cp.y-94*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#d9a928';x.beginPath();x.arc(lx,cp.y-86*ss,4*ss,0,Math.PI*2);x.fill();x.fillStyle='#3ca35b';x.beginPath();x.arc(lx,cp.y-78*ss,4*ss,0,Math.PI*2);x.fill()}}
+ // readable Philly-style street sign, changing as the run advances
+ let streets=['WASHINGTON AVE','PASSYUNK AVE','OREGON AVE','COLUMBUS BLVD'];let sn=streets[Math.floor(cross/620)%streets.length];if(cp.y>h*1.10&&cp.y<H*.43){let ss=Math.max(.22,Math.min(.32,cp.s));x.fillStyle='#14653d';x.fillRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.strokeStyle='#e7e7e7';x.lineWidth=Math.max(1,ss);x.strokeRect(W*.19+4*ss,cp.y-124*ss,104*ss,18*ss);x.fillStyle='#fff';x.font=`700 ${Math.max(7,9*ss)}px Arial`;x.textAlign='center';x.fillText(sn,W*.19+56*ss,cp.y-112*ss)}
+if(upgrades.lights){let hg=x.createRadialGradient(W/2,H*.72,8,W/2,H*.72,W*.30);hg.addColorStop(0,'rgba(255,244,180,.10)');hg.addColorStop(1,'rgba(255,244,180,0)');x.fillStyle=hg;x.fillRect(W*.24,H*.48,W*.52,H*.50)}
+}
+function draw(){road();
+if(wreck.active&&!truck.loading)vehicle(wreck,'#a72b2b','WRECK');
+/* v220: draw distant actors first; rival reduced to preserve player-road hierarchy */
+let actors=[{o:yard,c:'#3a8b52',l:'YARD',tow:false},{o:rival,c:'#2d5f9c',l:'RIVAL',tow:true}];actors.sort((a,b)=>b.o.z-a.o.z);actors.forEach(a=>vehicle(a.o,a.c,a.l,a.tow));
+vehicle({_player:true,lane:truck.lane,z:truck.z+28},'#f6b900','',true);
+if(truck.loading){let z=wreck.z+(truck.z+70-wreck.z)*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.unloading){let z=(truck.z+70)+(truck.z+126-(truck.z+70))*truck.loadProgress;vehicle({lane:truck.lane,z},'#a72b2b','')}
+else if(truck.loaded)vehicle({lane:truck.lane,z:truck.z+70},'#a72b2b','')
+}
+function loop(t){let dt=Math.min(.04,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('[data-k]').forEach(b=>{
+ let k=b.dataset.k;
+ const down=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=1};
+ const up=e=>{if(e&&e.cancelable)e.preventDefault();keys[k]=0};
+ if(window.PointerEvent){
+   b.addEventListener('pointerdown',down,{passive:false});
+   b.addEventListener('pointerup',up,{passive:false});
+   b.addEventListener('pointercancel',up,{passive:false});
+   b.addEventListener('pointerleave',up,{passive:false});
+ }else{
+   b.addEventListener('touchstart',down,{passive:false});
+   b.addEventListener('touchend',up,{passive:false});
+   b.addEventListener('touchcancel',up,{passive:false});
+   b.addEventListener('mousedown',down);
+   b.addEventListener('mouseup',up);
+   b.addEventListener('mouseleave',up);
+ }
+});
+addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=1;if(e.key==='ArrowDown'||e.key==='s')keys.down=1;if(e.key==='ArrowLeft'||e.key==='a')keys.left=1;if(e.key==='ArrowRight'||e.key==='d')keys.right=1});addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')keys.up=0;if(e.key==='ArrowDown'||e.key==='s')keys.down=0;if(e.key==='ArrowLeft'||e.key==='a')keys.left=0;if(e.key==='ArrowRight'||e.key==='d')keys.right=0});
+document.getElementById('hook').onclick=()=>{if(!playing||truck.loading||truck.unloading)return;
+if(!truck.loaded&&wreck.active&&Math.abs(truck.z-wreck.z)<95&&Math.abs(truck.lane-wreck.lane)<1.55){
+  truck.loading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='BED TILTING DOWN';
+}else if(truck.loaded&&Math.abs(truck.z-yard.z)<125&&Math.abs(truck.lane-yard.lane)<1.65){
+  truck.unloading=true;truck.loadProgress=0;truck.speed=0;
+  document.getElementById('status').textContent='PREPARING TO UNLOAD';
+}};
+document.getElementById('cam').onclick=()=>{cam=(cam+1)%2;document.getElementById('status').textContent=cam?'CHASE CAMERA':'DRIVER CAMERA'};
+const startGame=()=>{if(playing)return;playing=true;
+document.body.classList.add('shift-started');
+document.getElementById('start').style.display='none';
+last=performance.now();};
+document.getElementById('play').addEventListener('click',startGame);
+document.getElementById('play').addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();startGame()},{passive:false});
+async function browserSelfTest(){
+ const result=document.createElement('div');result.id='selftest';result.style.display='none';document.body.appendChild(result);
+ try{
+  startGame();
+  if(!playing) throw Error('start');
+  truck.z=wreck.z;truck.lane=wreck.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.loading) throw Error('load trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(!truck.loaded||wreck.active) throw Error('load completion');
+  truck.z=yard.z;truck.lane=yard.lane;truck.speed=0;document.getElementById('hook').click();
+  if(!truck.unloading) throw Error('unload trigger');
+  for(let i=0;i<100;i++) update(.04);
+  if(truck.loaded||cash!==450||rep!==10||!wreck.active) throw Error('delivery/reward/respawn');
+  document.getElementById('cam').click();if(cam!==1) throw Error('camera');
+  result.textContent='PASS: start, load, secure, transport-state, unload, reward, respawn, camera';
+ }catch(e){result.textContent='FAIL: '+e.message}
+}
+if(new URLSearchParams(location.search).has('autotest')) setTimeout(browserSelfTest,50);
+
+window.addEventListener('blur',()=>{Object.keys(keys).forEach(k=>keys[k]=0)});
+document.addEventListener('visibilitychange',()=>{
+  Object.keys(keys).forEach(k=>keys[k]=0);
+  if(!document.hidden) last=performance.now();
+});
+let soundMode=1;
+document.getElementById('sound').addEventListener('click',()=>{soundMode=(soundMode+1)%3;soundOn=soundMode!==0;document.getElementById('sound').textContent=soundMode===0?'🔇 OFF':soundMode===1?'🔊 SOUND':'🔉 LOW';if(soundOn){audioStart();tone(soundMode===2?180:240,.08,soundMode===2?.035:.065,'triangle');if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(soundMode===2?.025:.052,audioCtx.currentTime,.08)}else if(engineGain&&audioCtx)engineGain.gain.setTargetAtTime(0,audioCtx.currentTime,.05)});function unlockGameAudio(){audioStart();tone(180,.06,.045,'triangle')}
+document.addEventListener('pointerdown',unlockGameAudio,{once:true});
+document.addEventListener('touchstart',unlockGameAudio,{once:true,passive:true});
+
+document.getElementById('upgrades').addEventListener('click',()=>{document.getElementById('shop').style.display='block';refreshShop();tone(420,.05)});
+document.getElementById('closeShop').addEventListener('click',()=>document.getElementById('shop').style.display='none');
+document.querySelectorAll('.buy').forEach(b=>b.addEventListener('click',()=>buyUpgrade(b.dataset.u)));document.getElementById('repairTruck').addEventListener('click',()=>{if(cash<250){document.getElementById('status').textContent='NEED $250 FOR REPAIR';return}cash-=250;truckDamage=0;lives=3;document.getElementById('status').textContent='GARAGE REPAIR COMPLETE • 3 LIVES RESTORED';refreshShop();updateTruckCondition();tone(520,.08,.05,'triangle')});
+
+/* v231 TRUE VOLUME milestone: runtime draw fix, stronger F-650 cab/rollback volume, varied block rhythm; gameplay preserved */
+</script><div id="recoveryMeter" aria-live="polite" style="display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:158px;width:min(72%,360px);background:rgba(5,8,12,.88);border:1px solid #f6b900;border-radius:12px;padding:8px 10px;color:#fff;font:700 12px system-ui;text-align:center;z-index:8">
+<div id="recoveryText">ROLLBACK RECOVERY</div>
+<div style="height:7px;background:#333;border-radius:7px;margin-top:6px;overflow:hidden"><div id="recoveryFill" style="height:100%;width:0;background:#f6b900"></div></div>
+</div><div id="missionFlash" style="display:none;position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);z-index:20;background:rgba(0,0,0,.88);border:2px solid #f6b900;border-radius:14px;padding:14px 18px;color:white;font:900 16px system-ui;text-align:center;pointer-events:none">RECOVERY COMPLETE<br><span style="font-size:13px">+$450 • +10 REP</span></div></body></html>
++wreck.payout+' • '+call.priority+'</span>';
 }
 function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
 if(truck.loaded&&!rivalHasTow){
