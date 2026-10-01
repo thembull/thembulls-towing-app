@@ -1578,11 +1578,11 @@ function updateCareer(){
 }
 function rollCallType(){
  const calls=[
-  {type:'STANDARD',bonus:0,label:'VEHICLE CRASH',road:'WASHINGTON / PASSYUNK',scanner:'Broad St & Washington Ave • crash reported',priority:'PRIORITY 2'},
-  {type:'DISABLED',bonus:75,label:'DISABLED VEHICLE',road:'OREGON / PASSYUNK',scanner:'Passyunk Ave • disabled vehicle blocking lane',priority:'PRIORITY 2'},
-  {type:'MULTI-VEHICLE',bonus:125,label:'MULTI-VEHICLE',road:'COLUMBUS BLVD',scanner:'Columbus Blvd • multi-vehicle crash',priority:'PRIORITY 1'},
-  {type:'HIGHWAY',bonus:200,label:'HIGHWAY ROLLOVER',road:'I-95 SOUTH',scanner:'I-95 South • rollover blocking lane',priority:'PRIORITY 1'},
-  {type:'PRIORITY',bonus:300,label:'PRIORITY RECOVERY',road:'I-76 EAST',scanner:'I-76 East • priority recovery request',priority:'PRIORITY 1'}
+  {type:'STANDARD',bonus:0,label:'VEHICLE CRASH',road:'WASHINGTON / PASSYUNK',scanner:'Broad St & Washington Ave - crash reported',priority:'PRIORITY 2'},
+  {type:'DISABLED',bonus:75,label:'DISABLED VEHICLE',road:'OREGON / PASSYUNK',scanner:'Passyunk Ave - disabled vehicle blocking lane',priority:'PRIORITY 2'},
+  {type:'MULTI-VEHICLE',bonus:125,label:'MULTI-VEHICLE',road:'COLUMBUS BLVD',scanner:'Columbus Blvd - multi-vehicle crash',priority:'PRIORITY 1'},
+  {type:'HIGHWAY',bonus:200,label:'HIGHWAY ROLLOVER',road:'I-95 SOUTH',scanner:'I-95 South - rollover blocking lane',priority:'PRIORITY 1'},
+  {type:'PRIORITY',bonus:300,label:'PRIORITY RECOVERY',road:'I-76 EAST',scanner:'I-76 East - priority recovery request',priority:'PRIORITY 1'}
  ];
  const rankBoost=rep>=100?.10:rep>=50?.05:0;
  let r=Math.random()+rankBoost;
@@ -1590,7 +1590,14 @@ function rollCallType(){
  const call=calls[idx]; callType=call.type; callBonus=call.bonus;
  wreck.type=call.label; wreck.payout=450+callBonus;
  const m=document.getElementById('mission'),sc=document.getElementById('scannerText'),road=document.getElementById('routeRoad'),pay=document.getElementById('routePay'),rt=document.getElementById('routeText');
- if(m)m.textContent=call.label+(callBonus?' • BONUS 
+ if(m)m.textContent=call.label+(callBonus?' - BONUS $'+callBonus:'');
+ if(sc)sc.textContent=call.scanner;
+ if(road)road.textContent=call.road;
+ if(pay)pay.textContent='CALL PAY - $'+wreck.payout+'+';
+ if(rt)rt.textContent=(call.type==='HIGHWAY'||call.type==='PRIORITY')?'South Philly -> Highway Recovery':'South Philly -> Wreck';
+ const flash=document.getElementById('missionFlash');
+ if(flash)flash.innerHTML=call.label+'<br><span style="font-size:13px">BASE PAY $'+wreck.payout+' - '+call.priority+'</span>';
+}
 function update(dt){if(!playing)return;updateEngineSound();updateTruckCondition();let sh=document.getElementById('streak');if(sh)sh.textContent=towStreak;updateCareer();updateDistrict();
 if(truck.loaded&&!rivalHasTow){
  let chaseZ=truck.z-rival.z,chaseL=truck.lane-rival.lane;
